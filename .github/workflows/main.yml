@@ -11,8 +11,7 @@ jobs:
       - name: 📂 Sync files
         uses: SamKirkland/FTP-Deploy-Action@4.0.0
         with:
-          server: 194.67.108.232
-          username: root@194.67.108.232
+          server: sftp://194.67.108.232:22/
+          username: root
           password: ${{ secrets.ftp_password }}
-          port: 22
           server-dir: '/home/node/1/'
