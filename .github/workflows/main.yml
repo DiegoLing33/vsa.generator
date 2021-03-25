@@ -1,18 +1,19 @@
-- name: FTP Deployer
-  uses: sand4rt/ftp-deployer@v1.1
-  with:
-    # FTP host URL like: ftp.host.com
-    host: vsa.one
-    # FTP port default is: 21
-    port: 22 # optional
-    # Ftp username
-    username: root
-    # Ftp password
-    password: ${{ secrets.ftp_password }}
-    # The remote folder location of your FTP server
-    remote_folder: '/home/node/1' # optional
-    # The local folder location
-    local_folder: './' # optional, default is dist
-    # Remove existing files inside FTP remote folder
-    cleanup: true # optional
-    pasive: true # optional
+on: push
+name: 🚀 Deploy website on push
+jobs:
+  web-deploy:
+    name: 🎉 Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🚚 Get latest code
+        uses: actions/checkout@v2.3.2
+
+      - name: 📂 Sync files
+        uses: SamKirkland/FTP-Deploy-Action@4.0.0
+        with:
+          server: vsa.one
+          username: root
+          password: ${{ secrets.ftp_password }}
+          port: 22
+          protocol: 'sftp'
+          server-dir: '/home/node/1/'
