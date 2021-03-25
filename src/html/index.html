@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Image generator</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+</head>
+<body>
+<div class="container">
+	<h1 style="text-align: center" class="p-3">Image Generator</h1>
+	<div style="width: 500px; height: 500px; background-color: #eee" class="m-auto" id="res">
+
+	</div>
+	<div style="width: 500px; height: 500px;" class="m-auto">
+		<div class="row mt-3">
+			<div class="col">
+				<input value="api" id="keyword" class="form-control" placeholder="Type a keyword" />
+			</div>
+		</div>
+		<div class="row mt-3">
+			<div class="col">
+				<select id="type" class="form-select" aria-label="Default select example">
+					<option selected value="1">Simple UI component</option>
+					<option value="2">Complex UI component + Logic</option>
+					<option value="3">Service UI component</option>
+					<option value="4">Service</option>
+					<option value="5">Application</option>
+				</select>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-6">
+				<div class="btn btn-primary d-block block mt-3" id="next">Next</div>
+			</div>
+			<div class="col-md-6">
+				<div class="btn btn-primary d-block block mt-3" id="prev">Back</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script>
+	let PAGE = 0;
+	let lastKeWord = "";
+    const $kw = document.getElementById("keyword");
+    const $type = document.getElementById("type");
+	function find(){
+		if($kw.textContent !== lastKeWord) PAGE = 0;
+	    const $res = document.getElementById("res");
+	    $res.innerHTML = `<img src="/create/${$kw.value}/${$type.value}/${PAGE}" />`;
+	}
+	find();
+	document.getElementById("next").addEventListener("click", () => {
+	    PAGE++;
+	    find();
+	});
+	document.getElementById("prev").addEventListener("click", () => {
+	   PAGE--;
+	   if(PAGE < 0) PAGE = 0;
+	   find();
+	});
+	$type.addEventListener('change', () => {
+        find();
+	});
+</script>
+</body>
+</html>
