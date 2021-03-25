@@ -49,7 +49,7 @@ let cache: Record<string, string[]> = {};
 		res.sendFile(__dirname + "/html/index.html");
 	});
 
-	app.listen(80, "generator.vettrisa.ru", () => {
+	app.listen(8011, "generator.vettrisa.ru", () => {
 		Logger.log("Server is listening");
 	});
 
